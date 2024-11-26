@@ -6,14 +6,13 @@ WEBSITE_KEY = '6LfWyjkmAAAAAJfv7tBe1VBeQ6MQzVuYD2nKl5jE'
 
 def submit_form(driver):
     data = {
-        "key": "1f4fb8cb1f984088353186b558d1eb1b",
+        "key": "cafe0fde8073bf6f61797a4cc10167f1",
         "type": "recaptchav2",
         "googlesitekey": WEBSITE_KEY,
         "pageurl": driver.current_url,
     }
     try:
         token = requests.post(url="https://autocaptcha.pro/apiv3/process", json=data).json().get("captcha")
-        # print(token)
     except Exception as e:
         print("Lỗi khi giải Captcha", e)
 
