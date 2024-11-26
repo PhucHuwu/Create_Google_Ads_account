@@ -1,0 +1,18 @@
+Danh sách các lỗi của chương trình tạo tài khoản:
+
+Lỗi 1: Lỗi này gặp khi không thể mở driver Chrome.
+Lỗi 2: Lỗi này gặp khi tài khoản chứa quá nhiều MCC.
+Lỗi 3: Lỗi này găp khi web lag, không tìm thấy khu vực nhập tên.
+Lỗi 4: Lỗi này gặp khi icon mũi tên để chọn quốc gia bị che khuất.
+Lỗi 5: Lỗi này hiếm, gặp khi không thể nhập chữ "Hoa" để chọn quốc gia Hoa Kỳ.
+Lỗi 6: Lỗi này gặp khi vô tình cuộn chuột hoặc click chuột ra ngoài khiến lựa chọn "Hoa Kỳ" bị mất.
+Lỗi 7: Lỗi này gặp khi giải Captcha lỗi, hết tiền Captcha, tài khoản chưa xác minh danh tính hoặc MCC bị chết.
+
+Lưu ý:
+-Các lỗi 2, 3, 4, 5, 6, 7 đều có thể sẽ xảy ra khi trang web bị lag.
+-Mỗi lần đổi proxy mới sẽ cần xóa folder profile cũ và folder proxy_extension tương ứng.
+
+Cách xử lý tạm thời các lỗi trên là dừng chương trình, tắt các tab Chrome cũ và chạy lại chương trình.
+Trong trường hợp chạy lại mà vẫn lỗi nghiêm trọng thì hãy xóa các folder profile, proxy_extension và tiến hành đăng nhập lại.
+
+p/s: Chương trình được làm bởi PhucHuwuDev.

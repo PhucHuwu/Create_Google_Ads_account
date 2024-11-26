@@ -64,7 +64,7 @@ def create_account(account_id, num_accounts, idx, proxy):
         try:
             driver = uc.Chrome(options=options)
         except Exception:
-            print("Lỗi 1")
+            print(f"Lỗi 1 ở luồng {idx + 1}")
             time.sleep(180)
             exit()
 
