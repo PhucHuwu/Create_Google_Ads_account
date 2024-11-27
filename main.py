@@ -73,16 +73,16 @@ def create_account(account_id, num_accounts, idx, proxy):
         screen_height = screen_size.height
         num_windows = len(list_account_id)
 
-        num_cols = 4
-        num_rows = num_windows // num_cols + (1 if num_windows % num_cols != 0 else 0)
+        num_cols = num_windows
+        num_rows = 1
         window_width = screen_width // num_cols
-        window_height = screen_height // num_rows
+        window_height = screen_height // num_rows // 2
         driver.set_window_size(window_width, window_height)
 
         row = idx // num_cols
         col = idx % num_cols
-        x_position = col * window_width
-        y_position = row * window_height
+        x_position = col * window_width // 2
+        y_position = window_height
         driver.set_window_position(x_position, y_position)
 
     driver.get("https://ads.google.com/aw/account/new")
