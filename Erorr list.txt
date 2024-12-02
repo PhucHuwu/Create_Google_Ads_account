@@ -6,7 +6,9 @@ Lỗi 3: Lỗi này găp khi web lag, không tìm thấy khu vực nhập tên.
 Lỗi 4: Lỗi này gặp khi icon mũi tên để chọn quốc gia bị che khuất.
 Lỗi 5: Lỗi này hiếm, gặp khi không thể nhập chữ "Hoa" để chọn quốc gia Hoa Kỳ.
 Lỗi 6: Lỗi này gặp khi vô tình cuộn chuột hoặc click chuột ra ngoài khiến lựa chọn "Hoa Kỳ" bị mất.
-Lỗi 7: Lỗi này gặp khi giải Captcha lỗi, hết tiền Captcha, tài khoản chưa xác minh danh tính hoặc MCC bị chết.
+Lỗi 7: Lỗi này gặp khi icon mũi tên để chọn múi giờ bị che khuất.
+Lỗi 8: Lỗi này gặp khi vô tình cuộn chuột hoặc click chuột ra ngoài khiến lựa chọn múi giờ cần chọn bị mất.
+Lỗi 9: Lỗi này gặp khi giải Captcha lỗi, hết tiền Captcha, tài khoản chưa xác minh danh tính hoặc MCC bị chết.
 
 Lưu ý:
 -Các lỗi 2, 3, 4, 5, 6, 7 đều có thể sẽ xảy ra khi trang web bị lag.
