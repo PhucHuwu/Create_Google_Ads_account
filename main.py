@@ -23,6 +23,7 @@ if not os.path.exists('Account_id.csv'):
         'Name': [],
         'Country': [],
         'Timezone': [],
+        'Currency': [],
         'Proxy': []
     }
     df = pd.DataFrame(data)
