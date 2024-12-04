@@ -21,6 +21,7 @@ if not os.path.exists('Account_id.csv'):
     data = {
         'ID': [],
         'Name': [],
+        'Country': [],
         'Timezone': [],
         'Proxy': []
     }
@@ -34,13 +35,15 @@ if not os.path.exists('Account_id.csv'):
 df = pd.read_csv('Account_id.csv')
 list_account_id = df["ID"].dropna().values.tolist()
 list_name = df["Name"].dropna().values.tolist()
+list_country = df["Country"].dropna().values.tolist()
 list_timezone = df["Timezone"].dropna().values.tolist()
+list_money = df["Currency"].dropna().values.tolist()
 list_proxy = df["Proxy"].dropna().values.tolist()
 
 confirmation_received = threading.Event()
 
 
-def create_account(account_id, num_accounts, idx, proxy, timezone, name):
+def create_account(num_accounts, idx, account_id, name, country, timezone, money, proxy):
     options = uc.ChromeOptions()
     profile_directory = f"Profile_{idx + 1}"
     lst = proxy.split(":")
@@ -113,47 +116,53 @@ def create_account(account_id, num_accounts, idx, proxy, timezone, name):
             print(f"Lỗi 3 ở luồng {idx + 1}")
             continue
 
+        # country -----------------------------------------------------------------------------------------------------
         try:
             driver.find_element(By.XPATH, '/html/body/div[1]/root/div/div[1]/div[2]/div/div[3]/div/div/awsm-child-content/content-main/div/div/mcc-root/base-root/div/div[2]/div[1]/view-loader/new-account-view/mcc-create-account-stepper/div/ess-stepper/material-stepper/div[2]/div/step-loader/account-creation-step/div/div[1]/material-expansionpanel[3]/div/div[2]/div/div[1]/div/div/span[2]/country-select/material-dropdown-select/dropdown-button/div').click()
         except Exception:
             print(f"Lỗi 4 ở luồng {idx + 1}")
             continue
 
+        time.sleep(config.wait)
+        country_xpath = f"//material-select-dropdown-item[span[text()='{country}']]"
         try:
-            ActionChains(driver).send_keys("Hoa").perform()
+            click.auto_click(driver, country_xpath, 3)
         except Exception:
             print(f"Lỗi 5 ở luồng {idx + 1}")
             continue
 
-        time.sleep(config.wait)
-
-        try:
-            click.auto_click(driver, config.America_button_xpath, 3)
-        except Exception:
-            print(f"Lỗi 6 ở luồng {idx + 1}")
-            continue
-
-        # --------------------------------------------------------------------------------------------------------------
-        time.sleep(config.wait)
-        driver.switch_to.default_content()
-        time.sleep(config.wait)
+        # timezone ----------------------------------------------------------------------------------------------------
+        time.sleep(3)
 
         try:
             driver.find_element(By.XPATH, '/html/body/div[1]/root/div/div[1]/div[2]/div/div[3]/div/div/awsm-child-content/content-main/div/div/mcc-root/base-root/div/div[2]/div[1]/view-loader/new-account-view/mcc-create-account-stepper/div/ess-stepper/material-stepper/div[2]/div/step-loader/account-creation-step/div/div[1]/material-expansionpanel[4]/div/div[2]/div/div[1]/div/div/span[2]/time-zone-select/material-dropdown-select/dropdown-button/div/material-icon/i').click()
         except Exception:
-            print(f"Lỗi 7 ở luồng {idx + 1}")
+            print(f"Lỗi 6 ở luồng {idx + 1}")
             continue
 
         timezone_xpath = f"//material-select-dropdown-item[span[text()='{timezone}']]"
         try:
             click.auto_click(driver, timezone_xpath, 3)
         except Exception:
+            print(f"Lỗi 7 ở luồng {idx + 1}")
+            continue
+        # money -------------------------------------------------------------------------------------------------------
+        time.sleep(config.wait)
+
+        try:
+            driver.find_element(By.XPATH, '/html/body/div[1]/root/div/div[1]/div[2]/div/div[3]/div/div/awsm-child-content/content-main/div/div/mcc-root/base-root/div/div[2]/div[1]/view-loader/new-account-view/mcc-create-account-stepper/div/ess-stepper/material-stepper/div[2]/div/step-loader/account-creation-step/div/div[1]/material-expansionpanel[5]/div/div[2]/div/div[1]/div/div/span[2]/currency-select/material-dropdown-select/dropdown-button').click()
+        except Exception:
             print(f"Lỗi 8 ở luồng {idx + 1}")
             continue
-        # --------------------------------------------------------------------------------------------------------------
         
-        # driver.find_element(By.XPATH, '/html/body/div[1]/root/div/div[1]/div[2]/div/div[3]/div/div/awsm-child-content/content-main/div/div/mcc-root/base-root/div/div[2]/div[1]/view-loader/new-account-view/mcc-create-account-stepper/div/ess-stepper/material-stepper/div[2]/div/step-loader/account-creation-step/div/div[1]/material-expansionpanel[5]/div/div[2]/div/div[1]/div/div/span[2]/currency-select/material-dropdown-select/dropdown-button').click()
-        # click.auto_click(driver, config.USD_button_xpath)
+        time.sleep(config.wait)
+        money_xpath = f"//material-select-dropdown-item[span[text()='{money}']]"
+        try:
+            click.auto_click(driver, money_xpath, 3)
+        except Exception:
+            print(f"Lỗi 9 ở luồng {idx + 1}")
+            continue
+        # -------------------------------------------------------------------------------------------------------------
 
         driver.switch_to.default_content()
 
@@ -163,7 +172,7 @@ def create_account(account_id, num_accounts, idx, proxy, timezone, name):
         try:
             click.auto_click(driver, config.save_button_xpath, 30)
         except Exception:
-            print(f"Lỗi 9 ở luồng {idx + 1}")
+            print(f"Lỗi 10 ở luồng {idx + 1}")
             continue
 
         if NUM == 0:
@@ -181,8 +190,8 @@ threads = []
 num_accounts_per_thread = int(input("Nhập số lượng tài khoản cần tạo: "))
 
 if num_accounts_per_thread:
-    for idx, (id, timezone, proxy, name) in enumerate(zip(list_account_id, list_timezone, list_proxy, list_name)):
-        thread = threading.Thread(target=create_account, args=(id, num_accounts_per_thread, idx, proxy, timezone, name))
+    for idx, (id, name, country, timezone, money, proxy) in enumerate(zip(list_account_id, list_name, list_country, list_timezone, list_money, list_proxy)):
+        thread = threading.Thread(target=create_account, args=(num_accounts_per_thread, idx, id, name, country, timezone, money, proxy))
         thread.start()
         time.sleep(2)
         threads.append(thread)
