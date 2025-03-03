@@ -66,7 +66,6 @@ def create_account(num_accounts, idx, account_id, name, country, timezone, money
 
     with driver_lock:
         options.user_data_dir = profile_directory
-        options.add_argument(f"--load-extension={extension_path}")
         try:
             driver = uc.Chrome(options=options)
         except Exception:
