@@ -6,7 +6,7 @@ WEBSITE_KEY = '6LfWyjkmAAAAAJfv7tBe1VBeQ6MQzVuYD2nKl5jE'
 
 def submit_form(driver):
     data = {
-        "key": "cafe0fde8073bf6f61797a4cc10167f1",
+        "key": "YOUR_API_KEY",
         "type": "recaptchav2",
         "googlesitekey": WEBSITE_KEY,
         "pageurl": driver.current_url,

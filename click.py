@@ -9,13 +9,3 @@ def auto_click(driver, xpath, time):
     if button.is_displayed() and button.is_enabled():
         button.click()
         return
-
-# def auto_fill(driver, xpath, input_text):
-#     try:
-#         input_field = WebDriverWait(driver, 10).until(
-#             EC.presence_of_element_located((By.XPATH, xpath))
-#         )
-#         input_field.clear()
-#         input_field.send_keys(input_text)
-#     except Exception as e:
-#         print("Lỗi khi nhập dữ liệu")
