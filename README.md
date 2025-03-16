@@ -28,7 +28,7 @@ Dự án này tự động hoá việc tạo tài khoản con Google Ads bằng 
 1. Chỉnh sửa thông tin tài khoản trong file csv.
 2. Chạy script:
     ```sh
-    python create_google_ads_account.py
+    python main.py
     ```
 
 Chúc bạn thành công!
